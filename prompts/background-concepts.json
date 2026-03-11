@@ -1,0 +1,33 @@
+{
+  "spec": {
+    "globalPrompt": "Create a photorealistic cinematic environment image for a modern web novel. Emphasize atmosphere, lighting, believable architecture, realistic materials, and a unified live-action visual language shared with all other generated assets.",
+    "globalNegativePrompt": "anime, manga, cel shading, cartoon, text, logo, watermark, character close-up, deformed architecture, low detail",
+    "fixedWidth": 1440,
+    "fixedHeight": 2304,
+    "outputDir": "project/assets/world",
+    "defaultModel": "gemini-3.1-flash-image-preview"
+  },
+  "backgrounds": [
+    {
+      "id": "chapter-01-train-morning",
+      "name": "朝の山岳特急",
+      "model": "gemini-3.1-flash-image-preview",
+      "prompt": "Refined fictional Japanese limited express departing from a major Tokyo station toward mountain countryside, calm morning platform atmosphere, polished train body, quiet passengers, glimpses of elegant train interior and early light on the windows, subtle hidden danger just outside an ordinary homecoming trip. No main characters in close-up.",
+      "negativePrompt": "crowded commuter chaos, bullet train branding from real companies, overt gunfight, fantasy station design"
+    },
+    {
+      "id": "chapter-02-grave-hillside",
+      "name": "山あいの墓苑",
+      "model": "gemini-3.1-flash-image-preview",
+      "prompt": "Quiet fictional Japanese hillside temple cemetery in spring daylight, stone steps, mountain trees, old graves, incense haze, rural town atmosphere, elegant stillness with a faint covert tension. Believable architecture, realistic stone texture, cinematic depth, no close-up character posing.",
+      "negativePrompt": "horror cemetery, supernatural ghosts, dramatic battle scene, fantasy shrine architecture"
+    },
+    {
+      "id": "chapter-03-old-house-evening",
+      "name": "古民家風の実家",
+      "model": "gemini-3.1-flash-image-preview",
+      "prompt": "A quiet Japanese family house in a mountain town, old-house atmosphere but not ancient, late Showa to early Heisei details, wooden beams, tatami room, engawa, sliding doors, aluminum sash windows, warm evening light, lived-in emptiness, gentle sense that someone unseen is guarding the property.",
+      "negativePrompt": "ruined haunted house, extreme antique farmhouse, luxury modern villa, visible violence"
+    }
+  ]
+}

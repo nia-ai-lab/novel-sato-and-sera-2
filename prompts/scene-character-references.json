@@ -1,0 +1,148 @@
+{
+  "spec": {
+    "globalPrompt": "Create one photorealistic cinematic scene image for a modern web novel. Keep the style consistent with the title, character, and background assets. Use realistic anatomy, realistic materials, and live-action-like lighting.",
+    "globalNegativePrompt": "anime, manga, cel shading, cartoon, text, readable letters, chapter labels, talk labels, section labels, subtitles, captions, logo, watermark, UI overlay, collage, split panel, multiple moments in one frame, deformed anatomy",
+    "fixedWidth": 1080,
+    "fixedHeight": 1920,
+    "outputDir": "project/assets/episodes",
+    "defaultModel": "gemini-3.1-flash-image-preview"
+  },
+  "characters": [
+    {
+      "id": "sato",
+      "name": "サトー",
+      "aliases": ["佐藤一", "佐藤", "サトーさん"],
+      "referenceImage": "project/assets/characters/sato.png",
+      "visualRules": "Keep him as a mature 45-year-old Japanese man with long hair tied in a ponytail, mustache and chin beard, a lean athletic build, and American casual clothing. Do not turn him into a young clean-shaven hero."
+    },
+    {
+      "id": "sera",
+      "name": "セラ",
+      "aliases": ["猫耳メイド", "売り子", "車内販売員"],
+      "referenceImage": "project/assets/characters/sera.png",
+      "visualRules": "Keep her based on the faithful classic maid dress with cat ears, silver-gray hair, and golden eyes. Civilian disguises may layer over the maid silhouette, but do not turn the outfit into armor or a combat suit."
+    }
+  ],
+  "sceneOverrides": {
+    "scene-001-001-001": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "Sato is boarding the train alone for a homecoming trip.",
+        "Sera must not read as his companion; she is hidden among station staff or peripheral movement."
+      ],
+      "promptSuffix": "Compose a morning major-station platform scene with Sato alone near the boarding door of a fictional mountain limited express. If Sera appears, keep her distant or partially hidden near service equipment, pillars, or edge shadows. The first impression must be that Sato is traveling alone.",
+      "negativePrompt": "Do not place Sato and Sera side by side as a pair on the platform."
+    },
+    "scene-001-001-002": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato", "sera"],
+      "continuityNotes": [
+        "Sera is disguised as an onboard sales attendant.",
+        "Sato may receive service from her without recognizing her true identity."
+      ],
+      "promptSuffix": "Set the image inside a refined limited express carriage. Sato should be seated by the window as a relaxed traveler. Sera may be visible in the aisle with a service cart in a train-sales disguise, but she must still read as staff, not as his companion or partner.",
+      "negativePrompt": "Do not show Sato and Sera posing together or seated face to face as companions."
+    },
+    "scene-001-002-001": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sera"],
+      "continuityNotes": [
+        "The scene happens in the narrow train deck while Sato stays unaware in his seat.",
+        "The mountain line and sense of motion should remain readable."
+      ],
+      "promptSuffix": "Create a tense inter-car deck scene on a moving mountain limited express. Sera should be the clearest figure, covertly stopping danger around a service wagon, door, or deck fixtures, while Sato remains off-screen or distant and unaware.",
+      "negativePrompt": "Do not put Sato into an active combat pose or show him assisting Sera."
+    },
+    "scene-001-002-002": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "Sato has just arrived at the rural terminus and feels peaceful.",
+        "Sera remains separated among staff lines or station shadows."
+      ],
+      "promptSuffix": "Show a small mountain-town terminal station at arrival. Sato should stand alone on the quiet platform with luggage or tote bag, breathing in the rural air. If Sera appears, keep her hidden near station staff areas, carts, or the far side of the train.",
+      "negativePrompt": "Do not show Sato and Sera greeting each other at arrival."
+    },
+    "scene-002-001-001": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "Sato is choosing flowers alone in a rural station-front street.",
+        "Sera monitors from across the street or service space."
+      ],
+      "promptSuffix": "Compose a quiet small-town flower shop scene with Sato alone selecting grave flowers. If Sera appears, keep her separated behind a delivery vehicle, shop awning, utility pole, or window reflection.",
+      "negativePrompt": "Do not place Sato and Sera together at the flower counter."
+    },
+    "scene-002-001-002": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "Sato is climbing toward the temple cemetery by himself.",
+        "Any danger should read as an almost-natural accident."
+      ],
+      "promptSuffix": "Show stone steps leading to a hillside temple cemetery in spring daylight. Sato should be the only obvious traveler on the steps with flowers in hand. If Sera appears, keep her partially hidden among railings, trees, stone walls, or roof edges while averting an accident.",
+      "negativePrompt": "Do not show Sato and Sera walking together up the steps."
+    },
+    "scene-002-002-001": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "This is the emotional core of the grave visit.",
+        "Sera must remain distant enough not to break the prayerful mood."
+      ],
+      "promptSuffix": "Compose a calm hillside grave scene with Sato alone before a family grave, flowers and incense visible, mountains beyond. If Sera appears at all, keep her small and distant near trees, stone lanterns, or a far cemetery edge as covert protection.",
+      "negativePrompt": "Do not place Sera beside Sato at the grave or make the scene feel like a shared visit."
+    },
+    "scene-002-002-002": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "Sato leaves the cemetery with quiet fatigue.",
+        "Sera handles tailing attackers away from his awareness."
+      ],
+      "promptSuffix": "Show a mountain-town slope or lane leading away from the cemetery toward the old family house. Sato should walk alone with a modest tired calm. If Sera appears, keep her hidden near retaining walls, parked utility vans, or alley shadows while intercepting tails.",
+      "negativePrompt": "Do not show Sato and Sera side by side on the road home."
+    },
+    "scene-003-001-001": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "The old house should feel inhabited by memory, not abandoned ruin.",
+        "Sera remains outside or at the threshold as covert guard."
+      ],
+      "promptSuffix": "Create an evening scene at the entrance or main room of a rural Japanese family house with old-house atmosphere but modest modern details. Sato should be clearly alone while opening windows or stepping inside. If Sera appears, keep her outside in the garden edge, eaves shadow, or genkan threshold.",
+      "negativePrompt": "Do not stage Sera openly welcoming Sato inside the house."
+    },
+    "scene-003-001-002": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "Sato is relaxing on the engawa or near the kitchen at dusk.",
+        "Threat should remain exterior and unseen by him."
+      ],
+      "promptSuffix": "Show a warm dusk interior-exterior composition of the engawa or kitchen side of the old family house. Sato should be alone with tea, simple food, or a kettle. If Sera appears, keep her outside near power lines, the garden, or a side yard in covert motion.",
+      "negativePrompt": "Do not put Sera sitting with Sato on the engawa."
+    },
+    "scene-003-002-001": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato"],
+      "continuityNotes": [
+        "Sato is safely inside for the night.",
+        "Any danger should remain outside windows, shoji, or garden darkness."
+      ],
+      "promptSuffix": "Compose a quiet nighttime tatami-room scene in the old house. Sato should be alone settling into bed or resting after a bath under warm domestic light. If any sign of Sera appears, keep it distant in garden shadows or through glass, never inside as a companion.",
+      "negativePrompt": "Do not include Sera in the room with Sato."
+    },
+    "scene-003-002-002": {
+      "referenceCharacterIds": ["sato", "sera"],
+      "focusCharacterIds": ["sato", "sera"],
+      "continuityNotes": [
+        "Morning has come and Sato feels the trip was worthwhile.",
+        "Sera is finishing the final outside guard without breaking the dawn calm."
+      ],
+      "promptSuffix": "Create a dawn scene around the engawa and exterior of the old family house. Sato may be visible alone on the veranda as a peaceful homecoming traveler, while Sera remains outside in the garden or side yard covertly dealing with the last threat. Preserve calm morning air over overt action.",
+      "negativePrompt": "Do not show Sato and Sera interacting face to face or fighting together."
+    }
+  }
+}

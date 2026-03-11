@@ -1,0 +1,19 @@
+{
+  "spec": {
+    "globalPrompt": "Create a photorealistic cinematic illustration for a modern web novel. Keep lighting, materials, anatomy, and faces grounded in live-action realism. Maintain a unified realistic visual language across all generated assets.",
+    "globalNegativePrompt": "anime, manga, cel shading, cartoon, illustration with flat shading, text, logo, watermark, collage, split panel, deformed anatomy, low detail face, extra limbs",
+    "fixedWidth": 1440,
+    "fixedHeight": 2304
+  },
+  "titleImage": {
+    "id": "title-cover",
+    "model": "gemini-3.1-flash-image-preview",
+    "outputDir": "project/assets/title",
+    "referenceImages": [
+      "project/assets/characters/sato.png",
+      "project/assets/characters/sera.png"
+    ],
+    "prompt": "Create a stylish vertical cover for a modern Japanese spy slice-of-life novel set on a limited express heading into mountain countryside. Show Sato as the clear foreground subject seated by the train window, relaxed and slightly thoughtful during a homecoming trip, with mature rugged presence, long ponytail, mustache and chin beard, lean athletic build, and tasteful American casual clothing matched closely to the canonical character portrait. Outside the window or in reflections, suggest mountain light and a rural line ahead. In the aisle or mid-background, show Sera disguised as an onboard sales attendant pushing a service wagon. Match her canonical look closely: silver-gray hair, cat ears, golden eyes, and a faithful classic black-and-white maid base subtly integrated beneath or within a realistic train-attendant layer, so she reads first as staff, not as Sato's companion. She should feel quietly vigilant while Sato remains unaware. Keep the first impression elegant, nostalgic, and protected. Do not place any readable text or logo inside the image.",
+    "negativePrompt": "avoid generic action-poster layout, avoid overt explosions, avoid making Sato look young, avoid making Sato clean-shaven or short-haired, avoid turning Sera into a purely cute mascot, avoid putting Sera in the seat beside Sato as a companion, avoid visible guns, knives, swords, or open combat poses, avoid real railway logos or readable signage"
+  }
+}

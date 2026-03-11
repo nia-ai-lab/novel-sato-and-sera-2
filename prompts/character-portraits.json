@@ -1,0 +1,32 @@
+{
+  "spec": {
+    "globalPrompt": "Create a photorealistic cinematic full-body character portrait for a modern web novel. Preserve silhouette clarity, costume readability, realistic anatomy, realistic fabric texture, and a consistent live-action visual language shared with all other generated assets.",
+    "globalNegativePrompt": "anime, manga, cel shading, cartoon, text, logo, watermark, deformed anatomy, extra limbs, duplicate body parts, cropped head, doll-like face",
+    "fixedWidth": 1080,
+    "fixedHeight": 1920,
+    "outputDir": "project/assets/characters",
+    "defaultModel": "gemini-3.1-flash-image-preview"
+  },
+  "characters": [
+    {
+      "id": "sato",
+      "name": "サトー",
+      "model": "gemini-3.1-flash-image-preview",
+      "prompt": "Full-body portrait of Sato, a 45-year-old Japanese man with a wild but grounded presence. Slightly tall with a lean athletic build, not bulky, long black hair tied back in a ponytail, mustache and beard around the mouth and chin, thoughtful eyes, mature rugged face. He loves American casual fashion: denim, work shirt, leather boots, vintage military or trucker jacket, old wristwatch, canvas tote bag. He should feel masculine, lived-in, calm, and naturally cool rather than glamorous.",
+      "negativePrompt": "young idol look, clean-shaven face, short hair, exaggerated bodybuilder muscles, flashy luxury fashion, fantasy weapons, anime pretty-boy look",
+      "sourceRefs": [
+        "project/02_characters.md"
+      ]
+    },
+    {
+      "id": "sera",
+      "name": "セラ",
+      "model": "gemini-3.1-flash-image-preview",
+      "prompt": "Full-body portrait of Sera, an elite covert bodyguard disguised as a cat-eared maid. Small and agile build, silver-gray hair, sharp golden eyes, and a disciplined expression. Her outfit should remain faithful to a classic black-and-white maid dress: proper apron, modest frills, long skirt, fitted bodice, sleeves, and traditional maid headwear with cat ears integrated naturally. Do not redesign it into combat armor. Instead, hint at hidden lethality by letting one or two concealed weapons subtly peek out from the apron lining, sleeve, garter, or skirt fold. She must feel elegant, dangerous, disciplined, and quietly affectionate.",
+      "negativePrompt": "oversexualized maid, tactical armor, combat bodysuit, sci-fi combat suit, comedy chibi style, soft helpless expression, anime heroine look, doll face, exaggerated frills, giant visible weapons",
+      "sourceRefs": [
+        "project/02_characters.md"
+      ]
+    }
+  ]
+}
