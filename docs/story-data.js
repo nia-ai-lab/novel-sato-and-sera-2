@@ -5,7 +5,7 @@ window.STORY_DATA = {
   "genre": "現代スパイ旅情コメディ",
   "slug": "sato-graceful-homecoming",
   "status": "reviewing_full_draft",
-  "updatedAt": "2026-03-11T14:08:50.618Z",
+  "updatedAt": "2026-03-11T15:33:34.697Z",
   "titleDisplayLines": [
     "サトーの優雅な帰省",
     "",
@@ -13,7 +13,7 @@ window.STORY_DATA = {
   ],
   "titleImage": "./images/title/title-cover.webp",
   "titleImageAlt": "サトーの優雅な帰省 のタイトルビジュアル",
-  "generatedAt": "2026-03-11T14:08:50.629Z",
+  "generatedAt": "2026-03-11T15:33:34.703Z",
   "talkCount": 6,
   "sceneCount": 12,
   "scenes": [
@@ -161,7 +161,7 @@ window.STORY_DATA = {
           "id": "scene-001-001-002-beat-003",
           "index": 2,
           "kind": "narration",
-          "rawText": "車内販売のワゴンが近づいてきたのは、ちょうどその話を思い出したころだった。控えめな鈴のような音を立てながら、通路を一台のカートが進んでくる。押しているのは、紺色のボレロとエプロンをきちんと着た小柄な販売員だった。サトーは顔を上げ、なんとなく目を止めた。立ち姿が妙にぶれない。"
+          "rawText": "車内販売のワゴンが近づいてきたのは、ちょうどその話を思い出したころだった。控えめな鈴のような音を立てながら、通路を一台のカートが進んでくる。押しているのは、紺色のボレロとエプロンをきちんと着た、しなやかな販売員だった。サトーは顔を上げ、なんとなく目を止めた。立ち姿が妙にぶれない。"
         },
         {
           "id": "scene-001-001-002-beat-004",
