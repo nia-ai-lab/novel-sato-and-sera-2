@@ -29,11 +29,11 @@ function stripLeadingLabel(title, label) {
   return title;
 }
 
-function lineElement(text) {
-  const paragraph = document.createElement("p");
-  paragraph.className = "beat-line";
-  paragraph.textContent = text;
-  return paragraph;
+function lineElement(text, kind = "narration") {
+  const element = document.createElement(kind === "part" ? "h3" : "p");
+  element.className = kind === "part" ? "beat-part-label" : "beat-line";
+  element.textContent = text;
+  return element;
 }
 
 function beatElement(beat, beatIndex) {
@@ -43,7 +43,7 @@ function beatElement(beat, beatIndex) {
 
   const inner = document.createElement("div");
   inner.className = "beat-inner";
-  inner.append(lineElement(beat.rawText));
+  inner.append(lineElement(beat.rawText, beat.kind));
 
   article.append(inner);
   return article;
@@ -253,13 +253,21 @@ function sceneElement(scene, sceneIndex) {
 
   const talkLabel = document.createElement("p");
   talkLabel.className = "scene-talk-index";
-  talkLabel.textContent = scene.talkLabel;
+  talkLabel.textContent = `${scene.talkLabel} ${stripLeadingLabel(scene.talkTitle, scene.talkLabel)}`;
+
+  const sectionLabel = document.createElement("p");
+  sectionLabel.className = "scene-section-index";
+  sectionLabel.textContent = scene.sectionLabel;
 
   const title = document.createElement("h2");
   title.className = "scene-title";
-  title.textContent = stripLeadingLabel(scene.talkTitle, scene.talkLabel);
+  title.textContent = stripLeadingLabel(scene.title, scene.sectionLabel);
 
-  meta.append(chapterLabel, talkLabel, title);
+  const partLabel = document.createElement("p");
+  partLabel.className = "scene-part-index";
+  partLabel.textContent = scene.partLabel;
+
+  meta.append(chapterLabel, talkLabel, sectionLabel, title, partLabel);
   visual.append(image, veil, grain, meta);
 
   const copy = document.createElement("div");

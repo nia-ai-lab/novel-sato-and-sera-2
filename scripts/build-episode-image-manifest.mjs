@@ -10,7 +10,14 @@ const characterRefsPath = path.join(rootDir, "prompts", "scene-character-referen
 const outputPath = path.join(rootDir, "prompts", "episode-image-manifest.json");
 
 function buildSceneCorpus(scene) {
-  return [scene.chapterTitle, scene.title, scene.summary, ...scene.beats.map((beat) => beat.rawText)].join("\n");
+  return [
+    scene.chapterTitle,
+    scene.talkTitle,
+    scene.title,
+    scene.partLabel,
+    scene.summary,
+    ...scene.beats.map((beat) => beat.rawText),
+  ].join("\n");
 }
 
 function detectCast(scene, characters) {
@@ -47,7 +54,7 @@ function buildPrompt(scene, refEntries, override, refsConfig) {
     "Create one vertical smartphone-friendly scene illustration for a serial web novel.",
     "Do not render any readable text, chapter numbers, talk labels, section labels, captions, subtitles, logos, or UI overlays inside the image.",
     `Story context: ${scene.chapterTitle}${scene.talkTitle ? ` / ${scene.talkTitle}` : ""}.`,
-    `Scene focus: ${scene.title}.`,
+    `Scene focus: ${scene.title} / ${scene.partLabel}.`,
     `Summary: ${scene.summary}`,
     `Key beats: ${scene.beats.slice(0, 4).map((beat) => beat.rawText).join(" ")}`,
     refEntries.length > 0
@@ -83,6 +90,7 @@ async function main() {
       refsConfig.spec?.globalNegativePrompt ??
       "text, logo, watermark, split panel, multiple scenes in one image, deformed anatomy",
     defaultModel: refsConfig.spec?.defaultModel ?? "gemini-3.1-flash-image-preview",
+    promptSuffix: refsConfig.spec?.promptSuffix ?? "",
   };
 
   const episodes = story.scenes.map((scene) => {
@@ -100,6 +108,7 @@ async function main() {
     return {
       id: scene.id,
       title: scene.title,
+      partLabel: scene.partLabel,
       chapterTitle: scene.chapterTitle,
       chapterLabel: scene.chapterLabel,
       talkTitle: scene.talkTitle,

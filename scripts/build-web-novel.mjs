@@ -36,6 +36,22 @@ function toSceneId(chapterNumber, talkNumber, sectionNumber) {
   return `scene-${String(chapterNumber).padStart(3, "0")}-${String(talkNumber).padStart(3, "0")}-${String(sectionNumber).padStart(3, "0")}`;
 }
 
+function toPartKey(label) {
+  if (label.includes("サトー")) {
+    return "sato";
+  }
+  if (label.includes("セラ")) {
+    return "sera";
+  }
+  return (
+    label
+      .normalize("NFKC")
+      .toLowerCase()
+      .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
+      .replace(/^-+|-+$/g, "") || "part"
+  );
+}
+
 function normalizeParagraph(buffer) {
   const keepLineBreaks =
     buffer.length > 1 &&
@@ -93,15 +109,27 @@ async function loadManuscript() {
   return chapters.join("\n\n");
 }
 
+function isPartLine(line) {
+  return (
+    line.startsWith("##### ") ||
+    line === "サトーパート" ||
+    line === "セラパート"
+  );
+}
+
+function partLabelFromLine(line) {
+  return line.startsWith("##### ") ? line.replace(/^#####\s+/, "").trim() : line.trim();
+}
+
 function parseMarkdown(markdown, fallbackTitle = "Web Novel") {
   const lines = markdown.split(/\r?\n/);
   let title = fallbackTitle;
   let chapterCount = 0;
   let talkCount = 0;
-  let sceneCount = 0;
   let currentChapter = null;
   let currentTalk = null;
-  let currentScene = null;
+  let currentSection = null;
+  let currentPart = null;
   let paragraphBuffer = [];
   const scenes = [];
 
@@ -145,26 +173,31 @@ function parseMarkdown(markdown, fallbackTitle = "Web Novel") {
   }
 
   function flushParagraph() {
-    if (!currentScene || paragraphBuffer.length === 0) {
+    if (!currentPart || paragraphBuffer.length === 0) {
       return;
     }
 
     const paragraph = normalizeParagraph(paragraphBuffer);
     paragraphBuffer = [];
     if (paragraph) {
-      currentScene.paragraphs.push(paragraph);
+      currentPart.paragraphs.push(paragraph);
     }
   }
 
-  function flushScene() {
+  function flushPart() {
     flushParagraph();
-    if (!currentScene) {
+    if (!currentPart) {
       return;
     }
-    if (currentScene.paragraphs.length > 0) {
-      scenes.push(currentScene);
+    if (currentPart.paragraphs.length > 0) {
+      scenes.push(currentPart);
     }
-    currentScene = null;
+    currentPart = null;
+  }
+
+  function flushSection() {
+    flushPart();
+    currentSection = null;
   }
 
   for (const rawLine of lines) {
@@ -176,7 +209,7 @@ function parseMarkdown(markdown, fallbackTitle = "Web Novel") {
     }
 
     if (line.startsWith("## ")) {
-      flushScene();
+      flushSection();
       chapterCount += 1;
       currentChapter = {
         key: `chapter-${String(chapterCount).padStart(2, "0")}`,
@@ -191,7 +224,7 @@ function parseMarkdown(markdown, fallbackTitle = "Web Novel") {
     }
 
     if (line.startsWith("### ")) {
-      flushScene();
+      flushSection();
       const chapter = ensureChapter();
       const chapterTalkIndex = (chapter.talkIndex ?? 0) + 1;
       chapter.talkIndex = chapterTalkIndex;
@@ -213,12 +246,11 @@ function parseMarkdown(markdown, fallbackTitle = "Web Novel") {
     }
 
     if (line.startsWith("#### ")) {
-      flushScene();
+      flushSection();
       const talk = ensureTalk();
       const sectionNumber = (talk.sectionIndex ?? 0) + 1;
       talk.sectionIndex = sectionNumber;
-      sceneCount += 1;
-      currentScene = {
+      currentSection = {
         id: toSceneId(talk.chapterNumber, talk.number, sectionNumber),
         title: line.replace(/^####\s+/, "").trim(),
         sectionLabel: line.replace(/^####\s+/, "").trim().split(/[　 ]/)[0] || `第${sectionNumber}節`,
@@ -230,12 +262,39 @@ function parseMarkdown(markdown, fallbackTitle = "Web Novel") {
         talkLabel: talk.label,
         talkTitle: talk.title,
         talkIndex: talk.index,
+      };
+      continue;
+    }
+
+    if (isPartLine(line)) {
+      flushPart();
+      if (!currentSection) {
+        continue;
+      }
+
+      const partLabel = partLabelFromLine(line);
+      const partKey = toPartKey(partLabel);
+      currentPart = {
+        id: `${currentSection.id}-${partKey}`,
+        sectionId: currentSection.id,
+        title: currentSection.title,
+        sectionLabel: currentSection.sectionLabel,
+        partKey,
+        partLabel,
+        chapterKey: currentSection.chapterKey,
+        chapterLabel: currentSection.chapterLabel,
+        chapterTitle: currentSection.chapterTitle,
+        chapterIndex: currentSection.chapterIndex,
+        talkKey: currentSection.talkKey,
+        talkLabel: currentSection.talkLabel,
+        talkTitle: currentSection.talkTitle,
+        talkIndex: currentSection.talkIndex,
         paragraphs: [],
       };
       continue;
     }
 
-    if (!currentScene) {
+    if (!currentPart) {
       continue;
     }
 
@@ -247,7 +306,7 @@ function parseMarkdown(markdown, fallbackTitle = "Web Novel") {
     paragraphBuffer.push(line.trim());
   }
 
-  flushScene();
+  flushSection();
 
   return { title, scenes };
 }
@@ -259,32 +318,7 @@ async function cleanDocsDir() {
   );
 }
 
-async function copyRecursive(sourceDir, targetDir) {
-  if (!(await exists(sourceDir))) {
-    return;
-  }
-
-  await mkdir(targetDir, { recursive: true });
-  const entries = await readdir(sourceDir, { withFileTypes: true });
-
-  for (const entry of entries) {
-    if (entry.name === ".DS_Store") {
-      continue;
-    }
-
-    const sourcePath = path.join(sourceDir, entry.name);
-    const targetPath = path.join(targetDir, entry.name);
-
-    if (entry.isDirectory()) {
-      await copyRecursive(sourcePath, targetPath);
-    } else if (entry.isFile()) {
-      await mkdir(path.dirname(targetPath), { recursive: true });
-      await copyFile(sourcePath, targetPath);
-    }
-  }
-}
-
-async function copyGeneratedAssets() {
+async function copyGeneratedAssets(sceneIds = []) {
   const titleSource = path.join(projectAssetsDir, "title", "title-cover.webp");
   if (await exists(titleSource)) {
     await mkdir(path.join(docsDir, "images", "title"), { recursive: true });
@@ -319,7 +353,10 @@ async function copyGeneratedAssets() {
 
   const episodeDir = path.join(projectAssetsDir, "episodes");
   if (await exists(episodeDir)) {
-    const episodeFiles = (await readdir(episodeDir)).filter((fileName) => /\.webp$/i.test(fileName));
+    const allowed = new Set(sceneIds.map((id) => `${id}.webp`));
+    const episodeFiles = (await readdir(episodeDir)).filter(
+      (fileName) => /\.webp$/i.test(fileName) && (allowed.size === 0 || allowed.has(fileName)),
+    );
     await mkdir(path.join(docsDir, "images", "episodes"), { recursive: true });
     for (const fileName of episodeFiles) {
       await copyFile(
@@ -390,10 +427,12 @@ async function main() {
       talkTitle: scene.talkTitle,
       talkIndex: scene.talkIndex,
       sectionLabel: scene.sectionLabel,
+      partKey: scene.partKey,
+      partLabel: scene.partLabel,
       title: scene.title,
       summary: buildSummary(scene.paragraphs),
       image: `./images/episodes/${scene.id}.webp`,
-      alt: `${scene.chapterTitle}の${scene.title}をイメージしたビジュアルカード`,
+      alt: `${scene.chapterTitle}の${scene.title} ${scene.partLabel}をイメージしたビジュアルカード`,
       beatCount: beats.length,
       beats,
     });
@@ -401,7 +440,7 @@ async function main() {
 
   await mkdir(docsDir, { recursive: true });
   await cleanDocsDir();
-  await copyGeneratedAssets();
+  await copyGeneratedAssets(parsed.scenes.map((scene) => scene.id));
 
   const description = `${title}を、画像付きの縦スクロールWeb小説として読める静的サイト。`;
   const indexHtml = templates.indexTemplate
