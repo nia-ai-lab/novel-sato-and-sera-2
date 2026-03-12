@@ -5,7 +5,7 @@ window.STORY_DATA = {
   "genre": "現代スパイ旅情コメディ",
   "slug": "sato-graceful-homecoming",
   "status": "reviewing_full_draft",
-  "updatedAt": "2026-03-12T08:31:05.629Z",
+  "updatedAt": "2026-03-12T23:24:28.029Z",
   "titleDisplayLines": [
     "おっさんサトーの気ままな帰省",
     "",
@@ -13,7 +13,7 @@ window.STORY_DATA = {
   ],
   "titleImage": "./images/title/title-cover.webp",
   "titleImageAlt": "おっさんサトーの気ままな帰省 のタイトルビジュアル",
-  "generatedAt": "2026-03-12T08:31:05.633Z",
+  "generatedAt": "2026-03-12T23:24:28.030Z",
   "talkCount": 6,
   "sceneCount": 24,
   "scenes": [

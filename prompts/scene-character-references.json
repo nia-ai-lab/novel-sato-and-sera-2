@@ -1,12 +1,12 @@
 {
   "spec": {
     "globalPrompt": "Create one photorealistic cinematic scene image for a modern web novel. Keep the style consistent with the title, character, and background assets. Use realistic anatomy, realistic materials, grounded faces, and live-action-like lighting.",
-    "globalNegativePrompt": "anime, manga, cel shading, cartoon, text, readable letters, chapter labels, talk labels, section labels, subtitles, captions, logo, watermark, UI overlay, collage, split panel, multiple moments in one frame, deformed anatomy, extra limbs, duplicate body parts, malformed hands",
+    "globalNegativePrompt": "anime, manga, cel shading, cartoon, text, readable letters, chapter labels, talk labels, section labels, subtitles, captions, logo, watermark, UI overlay, collage, split panel, multiple moments in one frame, deformed anatomy, extra limbs, duplicate body parts, malformed hands, direct eye contact with camera, looking at viewer, portrait-style posing for the viewer",
     "fixedWidth": 1080,
     "fixedHeight": 1920,
     "outputDir": "project/assets/episodes",
     "defaultModel": "gemini-3.1-flash-image-preview",
-    "promptSuffix": "For Sato-part images, Sato must be the dominant subject and Sera, if visible, must stay small, hidden, and never read as a companion. For Sera-part images, Sera must be the dominant subject, actively stopping a separate attacker who clearly does not resemble Sato. In every Sera-part image, Sato must remain a smaller unaware background figure, non-combatant, not helping, and not making eye contact with Sera. Never let any attacker resemble Sato in face, hair, beard, age, clothing, build, or silhouette. All human figures must have normal anatomy with exactly two arms and two hands."
+    "promptSuffix": "For Sato-part images, Sato must be the dominant subject and Sera, if visible, must stay small, hidden, and never read as a companion. For Sera-part images, Sera must be the dominant subject, actively stopping a separate attacker who clearly does not resemble Sato. In every Sera-part image, Sato must remain a smaller unaware background figure, non-combatant, not helping, and not making eye contact with Sera. By default, no character may look into the camera or directly at the viewer, and no one should pose like a portrait for the audience; only allow camera gaze if a specific scene override explicitly requests it. Never let any attacker resemble Sato in face, hair, beard, age, clothing, build, or silhouette. All human figures must have normal anatomy with exactly two arms and two hands."
   },
   "characters": [
     {
@@ -277,10 +277,13 @@
       "continuityNotes": [
         "This is the Sera-part of the same dawn-finale incident as scene-003-002-002-sato.",
         "Keep the same engawa, same hedge or garden boundary, and same dawn palette as the paired image.",
-        "Sato must remain a smaller unaware figure on the engawa with tea."
+        "Sato must remain a smaller unaware figure on the engawa with tea.",
+        "Sera must keep her gaze on the watcher, her movement path, or the side yard, never toward the camera or viewer.",
+        "Keep the same broad composition as the approved retry: Sera in the left foreground near the hedge, the watcher recoiling center-right, and Sato small on the engawa in the back-right.",
+        "Sera must have exactly one left arm and one right arm with clean sleeve continuity. No duplicated left arm, no extra forearm, no extra glove, and no phantom limb behind the torso."
       ],
-      "promptSuffix": "Create a restrained dawn action image with Sera dominant near the hedge, side yard, or garden boundary, stopping the final watcher before withdrawal. Keep Sato smaller on the engawa in the background, calm and unaware. The watcher must be a distinct adult who does not resemble Sato.",
-      "negativePrompt": "Do not let the final watcher resemble Sato. Do not show Sato helping, noticing, or making eye contact."
+      "promptSuffix": "Create a restrained dawn action image with Sera dominant near the hedge, side yard, or garden boundary, stopping the final watcher before withdrawal. Preserve the current broad composition: Sera in the left foreground, watcher center-right, Sato small on the engawa in the background. Sera should be shown in side view or back-three-quarter view, focused on the watcher, and must not look toward the camera or viewer. Render Sera with exactly one left arm and one right arm only, with natural shoulder placement and a single continuous sleeve per arm. The watcher must be a distinct adult who does not resemble Sato.",
+      "negativePrompt": "Do not let the final watcher resemble Sato. Do not show Sato helping, noticing, or making eye contact. Do not make Sera look toward camera or viewer. Do not add an extra left arm, extra forearm, extra glove, duplicate sleeve, or any phantom limb for Sera."
     }
   }
 }
