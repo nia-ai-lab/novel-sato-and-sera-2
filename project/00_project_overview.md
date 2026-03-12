@@ -1,11 +1,11 @@
 ---
-title: "サトーの優雅な帰省"
+title: "おっさんサトーの気ままな帰省"
 subtitle: "猫耳メイドは静かに護衛"
 author: ""
 genre: "現代スパイ旅情コメディ"
 slug: "sato-graceful-homecoming"
 status: "reviewing_full_draft"
-updatedAt: "2026-03-11T04:30:00.000Z"
+updatedAt: "2026-03-12T00:00:00.000Z"
 ---
 
 # Project Overview

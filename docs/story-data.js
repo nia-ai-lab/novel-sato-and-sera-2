@@ -1,19 +1,19 @@
 window.STORY_DATA = {
-  "title": "サトーの優雅な帰省",
+  "title": "おっさんサトーの気ままな帰省",
   "subtitle": "猫耳メイドは静かに護衛",
   "author": "",
   "genre": "現代スパイ旅情コメディ",
   "slug": "sato-graceful-homecoming",
   "status": "reviewing_full_draft",
-  "updatedAt": "2026-03-12T08:28:37.299Z",
+  "updatedAt": "2026-03-12T08:31:05.629Z",
   "titleDisplayLines": [
-    "サトーの優雅な帰省",
+    "おっさんサトーの気ままな帰省",
     "",
     "猫耳メイドは静かに護衛"
   ],
   "titleImage": "./images/title/title-cover.webp",
-  "titleImageAlt": "サトーの優雅な帰省 のタイトルビジュアル",
-  "generatedAt": "2026-03-12T08:28:37.304Z",
+  "titleImageAlt": "おっさんサトーの気ままな帰省 のタイトルビジュアル",
+  "generatedAt": "2026-03-12T08:31:05.633Z",
   "talkCount": 6,
   "sceneCount": 24,
   "scenes": [
